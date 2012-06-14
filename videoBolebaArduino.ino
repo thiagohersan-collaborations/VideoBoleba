@@ -11,8 +11,9 @@ unsigned long toTurnOn;
 
 void setup() {
   // setup
-  Serial.begin(9600);
+  //Serial.begin(9600);
   pinMode(13,OUTPUT);
+  pinMode(12,OUTPUT);
 
   // initial state
   ledState = LOW;
@@ -21,6 +22,7 @@ void setup() {
 
   // pin stuff
   digitalWrite(13,ledState);
+  digitalWrite(12,ledState);
   //analogReference(DEFAULT);    // 5V  
   //analogReference(EXTERNAL);   // 
   analogReference(INTERNAL);    // 1.1V
@@ -40,12 +42,14 @@ void loop() {
     ledState = HIGH;
     toTurnOn = -1;
     digitalWrite(13,ledState);
+    digitalWrite(12,ledState);
     lastOn = millis();    
   }
   // if on for more than ONTIME milliseconds
   else if((ledState == HIGH)&&((millis()-lastOn) > ONTIME)){
     ledState = LOW;
     digitalWrite(13,ledState);
+    digitalWrite(12,ledState);
   }
 
   Serial.write( 0xff);
